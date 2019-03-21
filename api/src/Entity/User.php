@@ -28,7 +28,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class User extends BaseUser
 {
     /**
-     * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -55,7 +54,8 @@ class User extends BaseUser
     protected $username;
 
     /**
-     * @ORM\Column(type="uuid")
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */

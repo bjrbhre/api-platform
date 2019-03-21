@@ -18,7 +18,6 @@ class Greeting
     /**
      * @var int The entity Id
      *
-     * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
@@ -33,7 +32,8 @@ class Greeting
     public $name = '';
 
     /**
-     * @ORM\Column(type="uuid")
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
