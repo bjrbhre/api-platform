@@ -28,8 +28,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class User extends BaseUser
 {
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     protected $id;
 
@@ -53,14 +55,6 @@ class User extends BaseUser
      */
     protected $username;
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     */
-    private $uuid;
-
     public function isUser(?UserInterface $user = null): bool
     {
         return $user instanceof self && $user->id === $this->id;
@@ -70,17 +64,5 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->enabled = true;
-    }
-
-    public function getUuid(): Uuid
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid($uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
     }
 }

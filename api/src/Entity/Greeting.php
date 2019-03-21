@@ -16,10 +16,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Greeting
 {
     /**
-     * @var int The entity Id
-     *
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -31,28 +31,9 @@ class Greeting
      */
     public $name = '';
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
-     */
-    private $uuid;
 
-    public function getId(): int
+    public function getId(): Uuid
     {
         return $this->id;
-    }
-
-    public function getUuid()
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid($uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
     }
 }
