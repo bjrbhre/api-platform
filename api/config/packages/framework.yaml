@@ -15,3 +15,10 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    # Required for FOSUserBundle
+    form: { enabled: true }
+
+    # Required for FOSUserBundle
+    templating:
+        engines: ['twig']
